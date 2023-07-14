@@ -76,7 +76,8 @@ hi{
     float: right;
     padding: 20px;
     border: none;
-    margin-top: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     font-size: 36px;
     text-align: center;
 }
