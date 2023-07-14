@@ -75,7 +75,7 @@ hi{
 .topnav input[type=text] {
     float: right;
     padding: 20px;
-    border: none;
+    border-radius: 10px;
     margin-top: 20px;
     margin-bottom: 20px;
     font-size: 36px;
