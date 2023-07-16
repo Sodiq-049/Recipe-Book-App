@@ -9,21 +9,6 @@ header{
     color: white;
     padding: 20px;
     text-align: center;
-
-    searchInput{
-        float: right;
-        padding: 12px 20px 12px 40px;
-        border: 1px solid #ddd;
-        margin-top: 20px;
-        margin-bottom: 20px;
-        width: 100%;
-        height: auto;
-        font-size: 18px;
-        margin-right: 20px;
-        background-image: url('/css/searchicon.png');
-        background-position: 10px 12px;
-        background-repeat: no-repeat;
-    }
 }
 
 hi{
@@ -87,20 +72,6 @@ hi{
     background: #1e3799;
 }
 
-searchInput{
-    float: right;
-    padding: 12px 20px 12px 40px;
-    border: 1px solid #ddd;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 100%;
-    height: auto;
-    font-size: 18px;
-    margin-right: 20px;
-    background-image: url('/css/searchicon.png');
-    background-position: 10px 12px;
-    background-repeat: no-repeat;
-}
 
 
 @media screen and (max-width: 768px) {
