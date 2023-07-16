@@ -74,16 +74,18 @@ hi{
 
 .topnav input[type=text] {
     float: right;
-    padding: 20px;
+    padding: 12px 20px 12px 40px;
     border: 1px solid #ddd;
     margin-top: 20px;
     margin-bottom: 20px;
-    width: auto;
+    width: 100%;
     height: auto;
     font-size: 18px;
     margin-right: 20px;
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 12px;
+    background-repeat: no-repeat;
 }
-
 
 
 @media screen and (max-width: 768px) {
