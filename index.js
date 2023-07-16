@@ -1,6 +1,9 @@
 const API_KEY = "275d58779ccf4e22af03e792e8819fff";
 const recipeListEl = document.getElementById("recipe-list");
 
+const searchInput = document.getElementById("searchInput");
+const searchButton = document.getAnimations("searchButton");
+
 function displayRecipes(recipes) {
   recipeListEl.innerHTML = "";
   recipes.forEach((recipe) => {
@@ -45,6 +48,12 @@ async function getRecipes() {
 async function init() {
   const recipes = await getRecipes();
   displayRecipes(recipes);
+}
+
+function performSearch() {
+    const query = searchInput.value;
+    console.log("https://api.spoonacular.com/recipes/random?number=10&apiKey=${API_KEY}");
+    searchInput.value = "";
 }
 
 init();
