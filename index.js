@@ -35,7 +35,7 @@ function displayRecipes(recipes) {
 async function getRecipes() {
   const response = await fetch(
     `https://api.spoonacular.com/recipes/random?number=10&apiKey=${API_KEY}`
-    );
+  );
 
   const data = await response.json();
 
@@ -45,24 +45,6 @@ async function getRecipes() {
 async function init() {
   const recipes = await getRecipes();
   displayRecipes(recipes);
-}
-
-function myFunction() {
-  var input, filter, ul, li, a, i, txtValue;
-  input = document.getElementById('myInput');
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("myUL");
-  li = ul.getElementsByTagName('li');
-
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
-  }
 }
 
 init();
