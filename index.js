@@ -50,17 +50,4 @@ async function init() {
   displayRecipes(recipes);
 }
 
-function performSearch() {
-    const query = searchInput.value;
-    console.log("Performing search for query:");
-    searchInput.value = "";
-
-    searchInput.addEventListener("click", performSearch);
-    searchButton.addEventListener("keyup", function(event) {
-        if (event.key == "Enter") {
-            performSearch();
-        }
-    })
-}
-
 init();
