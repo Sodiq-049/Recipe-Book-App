@@ -72,6 +72,31 @@ hi{
     background: #1e3799;
 }
 
+#searchbar{
+    margin-left: 2%;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+input[type=text] {
+    width: 30%;
+    -webkit-transition: width 0.15s ease-in-out;
+    transition: width 0.15s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+    width: 70%;
+}
+
+#list{
+    font-size: 1.5em;
+    margin-left: 90px;
+}
+
+.recipe-list{
+    display: list-item;
+}
 
 
 @media screen and (max-width: 768px) {
