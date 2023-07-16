@@ -52,8 +52,15 @@ async function init() {
 
 function performSearch() {
     const query = searchInput.value;
-    console.log("https://api.spoonacular.com/recipes/random?number=10&apiKey=${API_KEY}");
+    console.log("Performing search for query:");
     searchInput.value = "";
+
+    searchInput.addEventListener("click", performSearch);
+    searchButton.addEventListener("keyup", function(event) {
+        if (event.key == "Enter") {
+            performSearch();
+        }
+    })
 }
 
 init();
