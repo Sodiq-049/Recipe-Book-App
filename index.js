@@ -32,6 +32,21 @@ function displayRecipes(recipes) {
   });
 }
 
+function search_recipe() {
+    let input = document.getElementById('searchbar').value
+    input=input.toLowerCase();
+    let x = document.getElementsByClassName('recipe-list');
+
+    for (i = 0; i < x.length; i++) {
+        if (!x[i].innerHTML.toLowerCase().includes(input)) {
+            x[i].style.display="none";
+        }
+        else {
+            x[i].style.display="list-item";
+        }
+    }
+}
+
 async function getRecipes() {
   const response = await fetch(
     `https://api.spoonacular.com/recipes/random?number=10&apiKey=${API_KEY}`
