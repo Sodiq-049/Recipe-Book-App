@@ -3,7 +3,7 @@ const recipeListEl = document.getElementById("recipe-list");
 
 function displayRecipes(recipes) {
   recipeListEl.innerHTML = "";
-  recipes.forEach((recipe) => {
+  recipes.forEach(async (recipe) => {
     const recipeItemEl = document.createElement("li");
     recipeItemEl.classList.add("recipe-item");
     recipeImageEl = document.createElement("img");
@@ -14,6 +14,14 @@ function displayRecipes(recipes) {
     recipeTitleEl.innerText = recipe.title;
 
     recipeIngredientsEl = document.createElement("p");
+    if (!recipe.extendedIngredients) {
+      const response = await fetch(
+        `https://api.spoonacular.com/recipes/informationBulk?ids=${recipe.id}&apiKey=${API_KEY}`
+      );
+      const data = await response.json();
+      recipe = data[0];
+    }
+
     recipeIngredientsEl.innerHTML = `
         <strong>Ingredients:</strong> ${recipe.extendedIngredients
           .map((ingredient) => ingredient.original)
@@ -32,19 +40,28 @@ function displayRecipes(recipes) {
   });
 }
 
-function search_recipe() {
-    let input = document.getElementById('searchbar').value
-    input=input.toLowerCase();
-    let x = document.getElementsByClassName('recipe-list');
+async function search_recipe() {
+  let input = document.getElementById("searchbar").value;
+  input = input.toLowerCase();
 
-    for (i = 0; i < x.length; i++) {
-        if (!x[i].innerHTML.toLowerCase().includes(input)) {
-            x[i].style.display="none";
-        }
-        else {
-            x[i].style.display="list-item";
-        }
-    }
+  const response = await fetch(
+    `https://api.spoonacular.com/recipes/complexSearch?number=10&apiKey=${API_KEY}&query=${input}`
+  );
+
+  const data = await response.json();
+
+  displayRecipes(data.results);
+
+  // let x = document.getElementsByClassName('recipe-list');
+
+  // for (i = 0; i < x.length; i++) {
+  //     if (!x[i].innerHTML.toLowerCase().includes(input)) {
+  //         x[i].style.display="none";
+  //     }
+  //     else {
+  //         x[i].style.display="list-item";
+  //     }
+  // }
 }
 
 async function getRecipes() {
