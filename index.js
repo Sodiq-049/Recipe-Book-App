@@ -5,7 +5,6 @@ async function displayRecipes(recipes) {
   recipeListEl.innerHTML = "";
   if (recipes[0] && !recipes[0].extendedIngredients) {
     const recipesId = recipes.map((r) => r.id).join(",");
-    console.log(recipesId);
     const response = await fetch(
       `https://api.spoonacular.com/recipes/informationBulk?ids=${recipesId}&apiKey=${API_KEY}`
     );
@@ -42,9 +41,22 @@ async function displayRecipes(recipes) {
   });
 }
 
+// Get the input field
+var input = document.getElementById("searchbar");
+
+// Execute a function when the user presses a key on the keyboard
+input.addEventListener("keypress", function (event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    search_recipe();
+  }
+});
+
 async function search_recipe() {
-  let input = document.getElementById("searchbar").value;
-  input = input.toLowerCase();
+
+   input = input.value.toLowerCase();
 
   const response = await fetch(
     `https://api.spoonacular.com/recipes/complexSearch?number=10&apiKey=${API_KEY}&query=${input}`
