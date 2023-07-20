@@ -1,4 +1,4 @@
-const API_KEY = "dcc29213012a4565a17fdf73bd5d1da4";
+const API_KEY = "d2d4092e67814508812177ccb243c969";
 const recipeListEl = document.getElementById("recipe-list");
 
 async function displayRecipes(recipes) {
