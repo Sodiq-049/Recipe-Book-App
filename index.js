@@ -1,8 +1,16 @@
 const API_KEY = "db06be3134ab461798f57dee040b3a77";
 const recipeListEl = document.getElementById("recipe-list");
 
-function displayRecipes(recipes) {
+async function displayRecipes(recipes) {
   recipeListEl.innerHTML = "";
+  if (recipes[0] && !recipes[0].extendedIngredients) {
+    const recipesId = recipes.map(r=> r.id).join(", ");
+    const response = await fetch(
+      `https://api.spoonacular.com/recipes/informationBulk?ids=${recipesId}&apiKey=${API_KEY}`
+    );
+    const data = await response.json();
+    recipes = data;
+  }
   recipes.forEach(async (recipe) => {
     const recipeItemEl = document.createElement("li");
     recipeItemEl.classList.add("recipe-item");
@@ -14,13 +22,7 @@ function displayRecipes(recipes) {
     recipeTitleEl.innerText = recipe.title;
 
     recipeIngredientsEl = document.createElement("p");
-    if (!recipe.extendedIngredients) {
-      const response = await fetch(
-        `https://api.spoonacular.com/recipes/informationBulk?ids=${recipe.id}&apiKey=${API_KEY}`
-      );
-      const data = await response.json();
-      recipe = data[0];
-    }
+    
 
     recipeIngredientsEl.innerHTML = `
         <strong>Ingredients:</strong> ${recipe.extendedIngredients
