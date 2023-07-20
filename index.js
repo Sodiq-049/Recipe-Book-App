@@ -1,9 +1,17 @@
 const API_KEY = "dcc29213012a4565a17fdf73bd5d1da4";
 const recipeListEl = document.getElementById("recipe-list");
 
-function displayRecipes(recipes) {
+async function displayRecipes(recipes) {
   recipeListEl.innerHTML = "";
-  recipes.forEach((recipe) => {
+  if (recipes[0] && !recipes[0].extendedIngredients) {
+    const recipesId = recipes.map(r=> r.id).join(", ");
+    const response = await fetch(
+      `https://api.spoonacular.com/recipes/informationBulk?ids=${recipesId}&apiKey=${API_KEY}`
+    );
+    const data = await response.json();
+    recipes = data;
+  }
+  recipes.forEach(async (recipe) => {
     const recipeItemEl = document.createElement("li");
     recipeItemEl.classList.add("recipe-item");
     recipeImageEl = document.createElement("img");
@@ -14,6 +22,8 @@ function displayRecipes(recipes) {
     recipeTitleEl.innerText = recipe.title;
 
     recipeIngredientsEl = document.createElement("p");
+    
+
     recipeIngredientsEl.innerHTML = `
         <strong>Ingredients:</strong> ${recipe.extendedIngredients
           .map((ingredient) => ingredient.original)
@@ -32,19 +42,28 @@ function displayRecipes(recipes) {
   });
 }
 
-function search_recipe() {
-    let input = document.getElementById('searchbar').value
-    input=input.toLowerCase();
-    let x = document.getElementsByClassName('recipe-list');
+async function search_recipe() {
+  let input = document.getElementById("searchbar").value;
+  input = input.toLowerCase();
 
-    for (i = 0; i < x.length; i++) {
-        if (!x[i].innerHTML.toLowerCase().includes(input)) {
-            x[i].style.display="none";
-        }
-        else {
-            x[i].style.display="list-item";
-        }
-    }
+  const response = await fetch(
+    `https://api.spoonacular.com/recipes/complexSearch?number=10&apiKey=${API_KEY}&query=${input}`
+  );
+
+  const data = await response.json();
+
+  displayRecipes(data.results);
+
+  // let x = document.getElementsByClassName('recipe-list');
+
+  // for (i = 0; i < x.length; i++) {
+  //     if (!x[i].innerHTML.toLowerCase().includes(input)) {
+  //         x[i].style.display="none";
+  //     }
+  //     else {
+  //         x[i].style.display="list-item";
+  //     }
+  // }
 }
 
 async function getRecipes() {
