@@ -42,10 +42,10 @@ async function displayRecipes(recipes) {
 }
 
 // Get the input field
-var input = document.getElementById("searchbar");
+var searchbar = document.getElementById("searchbar");
 
 // Execute a function when the user presses a key on the keyboard
-input.addEventListener("keypress", function (event) {
+searchbar.addEventListener("keypress", function (event) {
   // If the user presses the "Enter" key on the keyboard
   if (event.key === "Enter") {
     // Cancel the default action, if needed
@@ -55,8 +55,12 @@ input.addEventListener("keypress", function (event) {
 });
 
 async function search_recipe() {
+  input = searchbar.value.toLowerCase();
 
-   input = input.value.toLowerCase();
+  if (input.length < 3) {
+    alert("3 or more character is required to filter recipes");
+    return;
+  }
 
   const response = await fetch(
     `https://api.spoonacular.com/recipes/complexSearch?number=10&apiKey=${API_KEY}&query=${input}`
