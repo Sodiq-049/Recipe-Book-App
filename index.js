@@ -57,9 +57,10 @@ searchbar.addEventListener("keypress", function (event) {
 async function search_recipe() {
   input = searchbar.value.toLowerCase();
 
-  (input.length < 3)
+  if (input.length < 3) {
     alert("3 or more character is required to filter recipes");
     return;
+  }
 
   const response = await fetch(
     `https://api.spoonacular.com/recipes/complexSearch?number=10&apiKey=${API_KEY}&query=${input}`
